@@ -7,7 +7,7 @@
 - Database (MySQL 5.7.33 atau lebih baru)
 
 # TECH STACK
-- Laravel 10
+- Laravel 11 + Livewire 3
 - Frontend CSS: TailwindCSS & Flowbite
 - Database: MySQL
 

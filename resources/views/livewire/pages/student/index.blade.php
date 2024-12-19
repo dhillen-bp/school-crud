@@ -5,15 +5,25 @@
     </div>
 
     <div class="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="mt-5 flex items-center gap-3 px-5">
+            <label for="selectedClass" class="font-medium text-slate-500">Filter</label>
+            <select wire:model.live="selectedClass" id="selectedClass"
+                class="block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                <option value="">Select Class</option>
+                @foreach ($classes as $class)
+                    <option value="{{ $class->id }}">{{ $class->class_name . '-' . $class->code }}</option>
+                @endforeach
+            </select>
+        </div>
 
         <table id="studentTable">
             <thead>
                 <tr>
                     <th>
                         <span class="flex items-center">
-                            ID
-                            <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
+                            No
+                            <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
                             </svg>
@@ -51,6 +61,16 @@
                     </th>
                     <th>
                         <span class="flex items-center">
+                            Class
+                            <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                            </svg>
+                        </span>
+                    </th>
+                    <th>
+                        <span class="flex items-center">
                             Action
                             <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -68,6 +88,8 @@
                         <td class="text-gray-900 dark:text-white">{{ $student->student_number }}</td>
                         <td class="text-gray-900 dark:text-white">{{ $student->name }}</td>
                         <td class="text-gray-900 dark:text-white">{{ $student->gender }}</td>
+                        <td class="text-gray-900 dark:text-white">
+                            {{ $student->class->class_name . '-' . $student->class->code }}</td>
                         <td class="flex gap-3">
                             <a href="{{ route('student.edit', $student) }}" wire:navigate
                                 class="btn-warning btn-sm rounded-full">Edit</a>

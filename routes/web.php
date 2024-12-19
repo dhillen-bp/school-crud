@@ -9,6 +9,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/class', App\Livewire\Pages\Class\Index::class)->name('class.index');
     Route::get('/class/create', App\Livewire\Pages\Class\Create::class)->name('class.create');
     Route::get('/class/edit/{class}', App\Livewire\Pages\Class\Edit::class)->name('class.edit');
+    Route::get('/class/detail/{class}', App\Livewire\Pages\Class\Filter::class)->name('class.detail');
 
     Route::get('/students', App\Livewire\Pages\Student\Index::class)->name('student.index');
     Route::get('/students/create', App\Livewire\Pages\Student\Create::class)->name('student.create');

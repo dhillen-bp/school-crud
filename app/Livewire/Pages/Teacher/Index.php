@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Pages\Teacher;
 
+use App\Models\ClassModel;
 use App\Models\Teacher;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 
 class Index extends Component
 {
+    public $selectedClass = null;
+
     public function destroy($id)
     {
         Teacher::destroy($id);
@@ -20,7 +23,13 @@ class Index extends Component
 
     public function render()
     {
-        $teachers = Teacher::all();
-        return view('livewire.pages.teacher.index', ['teachers' => $teachers]);
+        $teachers = Teacher::with('class')
+            ->when($this->selectedClass, function ($query) {
+                return $query->where('class_id', $this->selectedClass);
+            })
+            ->get();
+        $classes = ClassModel::all();
+
+        return view('livewire.pages.teacher.index', ['teachers' => $teachers, 'classes' => $classes]);
     }
 }

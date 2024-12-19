@@ -11,7 +11,7 @@
                 <tr>
                     <th>
                         <span class="flex items-center">
-                            ID
+                            No
                             <svg class="ms-1 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -58,6 +58,9 @@
                         <td class="text-gray-900 dark:text-white">{{ $class->class_name }}</td>
                         <td class="text-gray-900 dark:text-white">{{ $class->code }}</td>
                         <td class="flex gap-3">
+                            <a href="{{ route('class.detail', $class) }}" wire:navigate
+                                class="btn-info btn-sm rounded-full">Detail</a>
+
                             <a href="{{ route('class.edit', $class) }}" wire:navigate
                                 class="btn-warning btn-sm rounded-full">Edit</a>
 
