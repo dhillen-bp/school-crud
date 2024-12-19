@@ -135,6 +135,11 @@
                             'data-modal-toggle'));
                         if (targetModal) {
                             targetModal.classList.remove('hidden');
+                            targetModal.setAttribute('aria-modal', 'true');
+                            targetModal.setAttribute('role', 'dialog');
+
+                            targetModal.classList.add('fixed', 'inset-0', 'z-50', 'flex', 'items-center',
+                                'justify-center', 'bg-black', 'bg-opacity-50');
                         }
                     });
                 });
@@ -144,6 +149,12 @@
                         const modalId = this.getAttribute('data-modal-hide');
                         const modal = document.getElementById(modalId);
                         modal.classList.add('hidden');
+                        targetModal.setAttribute('aria-hidden', 'true');
+                        modal.removeAttribute('aria-modal');
+                        modal.removeAttribute('role');
+
+                        modal.classList.remove('fixed', 'inset-0', 'z-50', 'flex', 'items-center',
+                            'justify-center', 'bg-black', 'bg-opacity-50');
                     });
                 });
             }

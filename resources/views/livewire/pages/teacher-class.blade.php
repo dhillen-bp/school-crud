@@ -8,10 +8,10 @@
                     Kelas
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nama Siswa
+                    Nama Guru
                 </th>
                 <th scope="col" class="bg-gray-50 px-6 py-3 dark:bg-gray-800">
-                    NISN
+                    No Induk Guru
                 </th>
                 <th scope="col" class="bg-gray-50 px-6 py-3 dark:bg-gray-800">
                     Gender

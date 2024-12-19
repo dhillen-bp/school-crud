@@ -92,5 +92,34 @@
                 perPageSelect: [10, 15, 20, 25],
             });
         }
+
+        document.querySelectorAll('[data-modal-toggle]').forEach((button) => {
+            button.addEventListener('click', function(e) {
+                const targetModal = document.getElementById(button.getAttribute(
+                    'data-modal-toggle'));
+                if (targetModal) {
+                    targetModal.classList.remove('hidden');
+                    targetModal.setAttribute('aria-modal', 'true');
+                    targetModal.setAttribute('role', 'dialog');
+
+                    targetModal.classList.add('fixed', 'inset-0', 'z-50', 'flex', 'items-center',
+                        'justify-center', 'bg-black', 'bg-opacity-50');
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-modal-hide]').forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal-hide');
+                const modal = document.getElementById(modalId);
+                modal.classList.add('hidden');
+                targetModal.setAttribute('aria-hidden', 'true');
+                modal.removeAttribute('aria-modal');
+                modal.removeAttribute('role');
+
+                modal.classList.remove('fixed', 'inset-0', 'z-50', 'flex', 'items-center',
+                    'justify-center', 'bg-black', 'bg-opacity-50');
+            });
+        });
     </script>
 @endpush

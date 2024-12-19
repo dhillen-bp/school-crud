@@ -19,15 +19,12 @@
             @foreach ($classes as $class)
                 @foreach ($class->students as $index => $student)
                     <tr class="border-b border-gray-200 dark:border-gray-700">
-
-                        {{-- Menampilkan kelas hanya untuk siswa pertama --}}
                         @if ($index == 0)
                             <td class="bg-gray-50 px-6 py-4 dark:bg-gray-800" rowspan="{{ $class->students->count() }}">
                                 <span class="text-2xl font-bold">{{ $class->class_name . '-' . $class->code }}</span>
                             </td>
                         @endif
 
-                        {{-- Menampilkan nama siswa dengan nomor urut --}}
                         <td class="px-6 py-4">
                             <div class="flex justify-between">
                                 <span>{{ $index + 1 }}.
@@ -38,30 +35,23 @@
                             </div>
                         </td>
 
-                        {{-- Menampilkan nama guru hanya pada baris pertama setiap kelas --}}
                         @if ($index == 0)
-                            <td class="bg-gray-50 px-6 py-4">
+                            <td class="py-4 align-top" rowspan="{{ $class->students->count() }}">
                                 @if ($class->teachers->isEmpty())
                                     -
                                 @else
                                     @foreach ($class->teachers as $teacherIndex => $teacher)
-                                        <div class="flex justify-between">
+                                        <div class="flex justify-between px-5">
                                             <span>{{ $teacherIndex + 1 }}.
                                                 {{ $teacher->name . ' (' . $teacher->teacher_number . ')' }}</span>
                                             <a href="{{ route('teacher.detail', $teacher) }}" wire:navigate
                                                 class="rounded-lg bg-blue-700 px-2 py-1 text-center text-xs font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 Detail</a>
                                         </div>
-                                        {{-- Pisahkan antar guru --}}
-                                        @if (!$loop->last)
-                                            <hr class="my-2">
-                                        @endif
+                                        <hr class="my-4 w-full p-0">
                                     @endforeach
                                 @endif
                             </td>
-                        @else
-                            {{-- Baris siswa berikutnya tidak perlu menampilkan guru --}}
-                            <td class="bg-gray-50 px-6 py-4"></td>
                         @endif
                     </tr>
                 @endforeach

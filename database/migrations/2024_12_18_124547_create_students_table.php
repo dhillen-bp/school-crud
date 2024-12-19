@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')->constrained('classes')->onUpdate('cascade');
+            $table->foreignId('class_id')->nullable()->constrained('classes')->onUpdate('cascade')->onDelete('set null');
             $table->string('name');
             $table->char('student_number', 10)->unique();
             $table->enum('gender', ['male', 'female']);
