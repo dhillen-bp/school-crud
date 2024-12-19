@@ -127,6 +127,25 @@
                     perPage: 10,
                     perPageSelect: [10, 15, 20, 25],
                 });
+
+
+                document.querySelectorAll('[data-modal-toggle]').forEach((button) => {
+                    button.addEventListener('click', function(e) {
+                        const targetModal = document.getElementById(button.getAttribute(
+                            'data-modal-toggle'));
+                        if (targetModal) {
+                            targetModal.classList.remove('hidden');
+                        }
+                    });
+                });
+
+                document.querySelectorAll('[data-modal-hide]').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const modalId = this.getAttribute('data-modal-hide');
+                        const modal = document.getElementById(modalId);
+                        modal.classList.add('hidden');
+                    });
+                });
             }
         }
 
