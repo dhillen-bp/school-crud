@@ -51,3 +51,7 @@ npm run build
 ```
 php artisan serve
 ```
+
+### 10. Login ke Web
+- email: test@example.com
+- Password: 123

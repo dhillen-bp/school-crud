@@ -16,7 +16,7 @@
             </select>
         </div>
 
-        <table id="studentTable">
+        <table id="studentTable{{ $selectedClass }}">
             <thead>
                 <tr>
                     <th>
@@ -113,14 +113,39 @@
 
 @push('after-script')
     <script type="module">
-        if (document.getElementById("studentTable") && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#studentTable", {
-                searchable: true,
-                sortable: true,
-                paging: true,
-                perPage: 10,
-                perPageSelect: [10, 15, 20, 25],
-            });
+        let dataTable;
+
+        function initializeDataTable(selectedClass = null) {
+            const tableId = selectedClass ? `studentTable${selectedClass}` : "studentTable";
+            console.log("id:", tableId);
+            console.log("cek1:", document.querySelector(`#${tableId}`));
+
+            if (document.querySelector(`#${tableId}`) && typeof simpleDatatables.DataTable !== 'undefined') {
+                console.log("cek2:", `#${tableId}`);
+                dataTable = new simpleDatatables.DataTable(`#${tableId}`, {
+                    searchable: true,
+                    sortable: true,
+                    paging: true,
+                    perPage: 10,
+                    perPageSelect: [10, 15, 20, 25],
+                });
+            }
         }
+
+        // Inisialisasi DataTable saat halaman dimuat
+        initializeDataTable();
+
+        // Memperbarui DataTable saat filter diubah
+        Livewire.on('filterUpdated', (selectedClass) => {
+            console.log('Filter diperbarui untuk kelas:', selectedClass);
+
+            // Tunggu beberapa saat untuk memastikan elemen sudah dirender
+            setTimeout(() => {
+                if (dataTable) {
+                    dataTable.destroy(); // Hancurkan DataTable yang lama
+                }
+                initializeDataTable(selectedClass); // Inisialisasi ulang DataTable
+            }, 300); // Delay untuk memastikan elemen muncul di DOM
+        });
     </script>
 @endpush

@@ -11,6 +11,11 @@ class Index extends Component
 {
     public $selectedClass = null;
 
+    public function updatedSelectedClass()
+    {
+        $this->dispatch('filterUpdated', $this->selectedClass);
+    }
+
     public function destroy($id)
     {
         Student::destroy($id);

@@ -16,7 +16,7 @@
             </select>
         </div>
 
-        <table id="teacherTable">
+        <table id="teacherTable{{ $selectedClass }}">
             <thead>
                 <tr>
                     <th>
@@ -113,14 +113,32 @@
 
 @push('after-script')
     <script type="module">
-        if (document.getElementById("teacherTable") && typeof simpleDatatables.DataTable !== 'undefined') {
-            const dataTable = new simpleDatatables.DataTable("#teacherTable", {
-                searchable: true,
-                sortable: true,
-                paging: true,
-                perPage: 10,
-                perPageSelect: [10, 15, 20, 25],
-            });
+        let dataTable;
+
+        function initializeDataTable(selectedClass = null) {
+            const tableId = selectedClass ? `teacherTable${selectedClass}` : "teacherTable";
+
+            if (document.querySelector(`#${tableId}`) && typeof simpleDatatables.DataTable !== 'undefined') {
+
+                dataTable = new simpleDatatables.DataTable(`#${tableId}`, {
+                    searchable: true,
+                    sortable: true,
+                    paging: true,
+                    perPage: 10,
+                    perPageSelect: [10, 15, 20, 25],
+                });
+            }
         }
+
+        initializeDataTable();
+
+        Livewire.on('filterUpdated', (selectedClass) => {
+            setTimeout(() => {
+                if (dataTable) {
+                    dataTable.destroy();
+                }
+                initializeDataTable(selectedClass);
+            }, 300);
+        });
     </script>
 @endpush
