@@ -14,8 +14,8 @@ class ClassModel extends Model
         return $this->hasMany(Student::class, 'class_id');
     }
 
-    public function teacher()
+    public function teachers()
     {
-        return $this->hasOne(Teacher::class);
+        return $this->hasMany(Teacher::class, 'class_id');
     }
 }

@@ -24,7 +24,9 @@
             <livewire:layout.navigation />
 
             <div class="p-4 sm:ml-64">
-                {{ $slot }}
+                <div class="d mt-14 p-4">
+                    {{ $slot }}
+                </div>
             </div>
 
             <x-toaster-hub />
@@ -32,6 +34,9 @@
     </div>
 
     @livewireScripts
+
+    <script src="{{ asset('js/simple-datatable.js') }}"></script>
+    @stack('after-script')
 </body>
 
 </html>

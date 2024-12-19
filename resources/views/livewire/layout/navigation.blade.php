@@ -43,18 +43,18 @@ new class extends Component {
                             class="flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="h-8 w-8 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                            <img class="h-8 w-8 rounded-full" src="{{ asset('images/default_user.jpeg') }}"
+                                alt="user photo">
                         </button>
                     </div>
                     <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                Neil Sims
+                                {{ Auth::user()->name }}
                             </p>
                             <p class="truncate text-sm font-medium text-gray-900 dark:text-gray-300" role="none">
-                                neil.sims@flowbite.com
+                                {{ Auth::user()->email }}
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -65,7 +65,7 @@ new class extends Component {
                             </li>
                             <li>
                                 <button wire:click="logout"
-                                    class="flex w-full justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="flex w-full justify-start px-4 py-2 text-sm text-gray-700 hover:bg-red-200 dark:text-gray-300 dark:hover:bg-red-200 dark:hover:text-white"
                                     role="menuitem">Sign out</button>
                             </li>
                         </ul>

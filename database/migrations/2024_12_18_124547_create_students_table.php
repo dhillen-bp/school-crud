@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('class_id')->constrained('classes')->onUpdate('cascade');
             $table->string('name');
-            $table->string('student_number')->unique();
+            $table->char('student_number', 10)->unique();
             $table->enum('gender', ['male', 'female']);
             $table->timestamps();
         });

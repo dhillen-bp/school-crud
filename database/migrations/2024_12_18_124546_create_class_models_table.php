@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('class_name');
-            $table->string('academic_year');
+            $table->string('code');
             $table->timestamps();
         });
     }

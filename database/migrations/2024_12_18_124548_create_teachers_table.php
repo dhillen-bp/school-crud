@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade');
+            $table->foreignId('class_id')->nullable()->constrained('classes')->onUpdate('cascade');
             $table->string('name');
-            $table->string('teacher_number')->unique();
+            $table->char('teacher_number', 16)->unique();
             $table->enum('gender', ['male', 'female']);
             $table->timestamps();
         });
