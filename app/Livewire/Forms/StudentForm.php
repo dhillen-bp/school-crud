@@ -10,7 +10,7 @@ use Masmerise\Toaster\Toaster;
 
 class StudentForm extends Form
 {
-    public ?Student $student;
+    public ?Student $student = null;
 
     public $name = '';
     public $class_id = '';

@@ -10,7 +10,7 @@ use Masmerise\Toaster\Toaster;
 
 class TeacherForm extends Form
 {
-    public ?Teacher $teacher;
+    public ?Teacher $teacher = null;
 
     public $name = '';
     public $class_id = '';
@@ -25,7 +25,7 @@ class TeacherForm extends Form
             'teacher_number' => [
                 'required', 'digits:16',
                 'numeric',
-                // Rule::unique('teachers', 'teacher_number')->ignore($this->teacher)
+                Rule::unique('teachers', 'teacher_number')->ignore($this->teacher)
             ],
             'gender' => 'required|in:male,female',
         ];
@@ -37,7 +37,7 @@ class TeacherForm extends Form
             'class_id.required' => 'Kelas wajib dipilih.',
             'class_id.exists' => 'Kelas tidak valid.',
             'teacher_number.required' => 'Nomor Induk Guru wajib diisi',
-            // 'teacher_number.unique' => 'Nomor Induk Guru harus unik.',
+            'teacher_number.unique' => 'Nomor Induk Guru harus unik.',
             'teacher_number.digits' => 'Nomor Induk Guru harus 16 digit.',
             'teacher_number.numeric' => 'Nomor Induk Guru harus berupa angka.',
             'gender.required' => 'Jenis kelamin wajib dipilih.',
