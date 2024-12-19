@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Teacher;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Masmerise\Toaster\Toaster;
@@ -21,7 +22,11 @@ class TeacherForm extends Form
         return [
             'name' => 'required',
             'class_id' => 'required|exists:classes,id',
-            'teacher_number' => 'required|unique:students|digits:16|numeric',
+            'teacher_number' => [
+                'required', 'digits:16',
+                'numeric',
+                // Rule::unique('teachers', 'teacher_number')->ignore($this->teacher)
+            ],
             'gender' => 'required|in:male,female',
         ];
     }
@@ -32,7 +37,7 @@ class TeacherForm extends Form
             'class_id.required' => 'Kelas wajib dipilih.',
             'class_id.exists' => 'Kelas tidak valid.',
             'teacher_number.required' => 'Nomor Induk Guru wajib diisi',
-            'teacher_number.unique' => 'Nomor Induk Guru harus unik.',
+            // 'teacher_number.unique' => 'Nomor Induk Guru harus unik.',
             'teacher_number.digits' => 'Nomor Induk Guru harus 16 digit.',
             'teacher_number.numeric' => 'Nomor Induk Guru harus berupa angka.',
             'gender.required' => 'Jenis kelamin wajib dipilih.',
@@ -66,7 +71,7 @@ class TeacherForm extends Form
         $this->teacher->update([
             'name' => $this->name,
             'class_id' => $this->class_id,
-            'student_number' => $this->teacher_number,
+            'teacher_number' => $this->teacher_number,
             'gender' => $this->gender,
         ]);
 

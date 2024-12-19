@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Student;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Masmerise\Toaster\Toaster;
@@ -21,7 +22,11 @@ class StudentForm extends Form
         return [
             'name' => 'required',
             'class_id' => 'required|exists:classes,id',
-            'student_number' => 'required|unique:students|digits:16|numeric',
+            'student_number' => [
+                'required', 'digits:10',
+                'numeric',
+                Rule::unique('students', 'student_number')->ignore($this->student)
+            ],
             'gender' => 'required|in:male,female',
         ];
     }
